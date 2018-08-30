@@ -18,5 +18,4 @@ number = calculator_pb2.Number(value=16)
 response = stub.SquareRoot(number)
 
 # finally
-pdb.set_trace()
 print(response.value)
