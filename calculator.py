@@ -1,5 +1,4 @@
 import math
-import pdb
 
 
 def square_root(x):
