@@ -19,6 +19,11 @@ class CalculatorStub(object):
         request_serializer=calculator__pb2.Number.SerializeToString,
         response_deserializer=calculator__pb2.Number.FromString,
         )
+    self.Sine = channel.unary_unary(
+        '/Calculator/Sine',
+        request_serializer=calculator__pb2.Number.SerializeToString,
+        response_deserializer=calculator__pb2.Number.FromString,
+        )
 
 
 class CalculatorServicer(object):
@@ -26,6 +31,13 @@ class CalculatorServicer(object):
   pass
 
   def SquareRoot(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def Sine(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -40,7 +52,54 @@ def add_CalculatorServicer_to_server(servicer, server):
           request_deserializer=calculator__pb2.Number.FromString,
           response_serializer=calculator__pb2.Number.SerializeToString,
       ),
+      'Sine': grpc.unary_unary_rpc_method_handler(
+          servicer.Sine,
+          request_deserializer=calculator__pb2.Number.FromString,
+          response_serializer=calculator__pb2.Number.SerializeToString,
+      ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
       'Calculator', rpc_method_handlers)
+  server.add_generic_rpc_handlers((generic_handler,))
+
+
+class SearchEngineStub(object):
+  # missing associated documentation comment in .proto file
+  pass
+
+  def __init__(self, channel):
+    """Constructor.
+
+    Args:
+      channel: A grpc.Channel.
+    """
+    self.GetSearchAnswer = channel.unary_unary(
+        '/SearchEngine/GetSearchAnswer',
+        request_serializer=calculator__pb2.SearchRequest.SerializeToString,
+        response_deserializer=calculator__pb2.SearchResponse.FromString,
+        )
+
+
+class SearchEngineServicer(object):
+  # missing associated documentation comment in .proto file
+  pass
+
+  def GetSearchAnswer(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+
+def add_SearchEngineServicer_to_server(servicer, server):
+  rpc_method_handlers = {
+      'GetSearchAnswer': grpc.unary_unary_rpc_method_handler(
+          servicer.GetSearchAnswer,
+          request_deserializer=calculator__pb2.SearchRequest.FromString,
+          response_serializer=calculator__pb2.SearchResponse.SerializeToString,
+      ),
+  }
+  generic_handler = grpc.method_handlers_generic_handler(
+      'SearchEngine', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

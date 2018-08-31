@@ -4,7 +4,24 @@ message Number {
     float value = 1;
 }
 
+message SearchRequest {
+    // this is the request string for the search function.
+    string query = 1;
+}
+
+message SearchResponse {
+    // this defines the search response (a string).
+    string response = 1;
+}
+
 service Calculator {
     rpc SquareRoot(Number) returns (Number) {}
+    rpc Sine(Number) returns (Number) {}
 }
+
+service SearchEngine {
+    rpc GetSearchAnswer(SearchRequest) returns (SearchResponse) {}
+}
+
+
 

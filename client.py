@@ -14,7 +14,7 @@ stub = calculator_pb2_grpc.CalculatorStub(channel)
 number = calculator_pb2.Number(value=16)
 
 # make the call
-response = stub.SquareRoot(number)
+response = stub.Sine(number)
 
 # finally
 print(response.value)
